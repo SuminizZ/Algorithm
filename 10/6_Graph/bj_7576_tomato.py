@@ -25,7 +25,8 @@ for i in range(n):
         if tomato[i][j] == 1:
             dq.append((i, j))   # 1 인 토마토 정보는 미리 다 넣고 시작해야, '최소' 소요일을 구할 수 있다
 
-bfs(dq)     
+bfs(dq) 
+
 for i in range(n):
     if 0 in tomato[i]:
         print(-1)

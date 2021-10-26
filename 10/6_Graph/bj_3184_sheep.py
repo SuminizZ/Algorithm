@@ -31,8 +31,7 @@ def bfs(start):
 
     return (wolf, sheep)
 
-tot_wolf = 0
-tot_sheep = 0
+tot_wolf = tot_sheep = 0
 for i in range(n):
     for j in range(m):
         if field[i][j] == 'o' or field[i][j] == 'v':

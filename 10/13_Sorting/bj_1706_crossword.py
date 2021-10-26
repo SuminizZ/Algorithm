@@ -1,5 +1,4 @@
 import sys
-
 input = sys.stdin.readline
 n, m = map(int, input().split())    # (r, c)
 cw = []
@@ -32,3 +31,4 @@ for i in range(n):
 
 result.sort()
 print(result[0])
+

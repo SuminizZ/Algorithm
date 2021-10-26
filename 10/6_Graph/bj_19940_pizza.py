@@ -1,5 +1,4 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
 tc = int(input())
 
@@ -35,6 +34,8 @@ while tc:
     time = int(input())
     print(*setTime(time))
     tc -= 1
+
+
 
 
 # 1. 남은 시간이 60보다 작아질 때까지 60을 누름
