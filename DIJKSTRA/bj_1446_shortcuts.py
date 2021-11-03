@@ -17,40 +17,36 @@ for i in dist:
 
 print(dist[-1])
 
-## 2. 실패
-# from collections import defaultdict
-# from heapq import *
-# import sys
+## 2. 정석적인 DIKJSTRA
+import sys
+from collections import defaultdict
+from heapq import *
+sys = sys.stdin.readline
 
-# n, total = map(int, input().split())
-# graph = defaultdict(list)
-# mincost = defaultdict(int)
-# for _ in range(n):
-#     start, end, dist = map(int, sys.stdin.readline().split())
-#     graph[start].append((end, min(dist, end-start)))                # 지름길 사용 vs 그냥 고속도로 사용 중 최소거리
-#     if not graph[end]:
-#         graph[end].append((total, total-end))
-#     mincost[start] = float('inf')
-#     mincost[end] = float('inf')
-# graph[0].append((total, total))    
-# mincost[total] = float('inf')
-# mincost[0] = 0
+n, d = map(int, input().split())
+graph = defaultdict(list)          # 0~150, default : 자기 노드 + 1 과 연결되어 있음
+for i in range(d):
+    graph[i].append([i+1, 1])    # connected node, weight
 
-# def getShortest(n, total):
-#     hq = [(mincost[0], 0)]
-#     heapify(hq)
-#     while hq:
-#         cur_dist, cur_node = heappop(hq)  
-#         for nxt_node, nxt_dist in graph[cur_node]:
-#             if nxt_dist < 0 or mincost[nxt_node] <= cur_dist:
-#                  continue     # 역주행 방지, 중복 방문 x
-#             distance = cur_dist + nxt_dist
-#             if mincost[nxt_node] > distance:
-#                 mincost[nxt_node] = distance
-#             heappush(hq, (mincost[nxt_node], nxt_node))
+for _ in range(n):
+    s, e, l = map(int, input().split()) 
+    if e <= d:
+        graph[s].append([e, l])         # 지름길로 연결된 노드도 추가
 
-#     return mincost[total]              
+mindist = [float('inf') for _ in range(d+1)]       # k 까지 도달하는 최소 거리
+hq = []
+heappush(hq, [0, 0])  # 현재 노드까지 오면서 누적된 wgt, node
 
-# print(getShortest(n, total))
+while hq:
+    cur_w, cur_n = heappop(hq)
+    if mindist[cur_n] < cur_w: continue     # 더이상 작아질 수 없음
+    
+    for nxt_n, nxt_w in graph[cur_n]:
+        dist = cur_w + nxt_w
+        if mindist[nxt_n] > dist:
+            mindist[nxt_n] = dist
+            heappush(hq, [mindist[nxt_n], nxt_n])       # else : 이미 더 작은 거리로 힙큐에 들어가 있음
+
+print(mindist[d])
 
 

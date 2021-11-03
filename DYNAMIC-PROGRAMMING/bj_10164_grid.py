@@ -7,10 +7,10 @@ if n == 1 or m == 1:
     print(1)
     sys.exit(0)
 
-if k == 0 :
+if k == 0 :         
     n1, m1, n2, m2 = n, m, 0, 0
 else:
-    if k%m == 0:
+    if k%m == 0:            # 각 행의 마지막 열
         n1, m1 = k//m, m
     else: 
         n1, m1 = k//m + 1, k%m

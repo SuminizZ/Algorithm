@@ -10,7 +10,6 @@ change = int(input())
 DP = [0 for _ in range(change+1)]
 
 DP[0] = 1
-
 for c in coins:                 
     for i in range(1, change+1):        # 특정 동전만 사용해서 지불하는 경우
         if i - c >= 0:
